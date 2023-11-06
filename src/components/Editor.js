@@ -110,13 +110,28 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
                     // }, 0);
                 }
             });
+            function getLowestPosition(anchor, head) {
+                if (anchor.line < head.line || (anchor.line === head.line && anchor.ch < head.ch)) {
+                    return anchor;
+                } else {
+                    return head;
+                }
+            }
+            function getGreatestPosition(anchor, head) {
+                if (anchor.line > head.line || (anchor.line === head.line && anchor.ch > head.ch)) {
+                    return anchor;
+                } else {
+                    return head;
+                }
+            }
             socketRef.current?.on(ACTIONS.SELECT, (anchor, head) => {
                 console.log("anchor", anchor);
                 // editorRef?.current?.focus();
-                const { line, ch } = anchor;
+                let from = getLowestPosition(anchor, head);
+                let to = getGreatestPosition(anchor, head);
                 editorRef.current?.markText(
-                    { line: line, ch: ch },
-                    { line: head["line"], ch: head["ch"] },
+                    { line: from.line, ch: from.ch },
+                    { line: to.line, ch: to.ch },
                     {
                         className: 'user-selection'
                     }

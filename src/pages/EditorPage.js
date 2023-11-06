@@ -87,7 +87,7 @@ const EditorPage = () => {
         <div className="mainWrap">
             <div className="aside">
                 <div className="asideInner">
-                    <h3>Connected</h3>
+                    <h3>Members</h3>
                     <div className="clientsList">
                         {clients.map((client) => (
                             <Client
