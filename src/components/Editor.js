@@ -127,6 +127,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
             socketRef.current?.on(ACTIONS.SELECT, (anchor, head) => {
                 console.log("anchor", anchor);
                 // editorRef?.current?.focus();
+                editorRef.current.getAllMarks().forEach(mark => mark.clear());
                 let from = getLowestPosition(anchor, head);
                 let to = getGreatestPosition(anchor, head);
                 editorRef.current?.markText(

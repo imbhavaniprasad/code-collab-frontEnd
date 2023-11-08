@@ -28,18 +28,6 @@ export const register = createAsyncThunk(
 );
 
 
-export const loadUser = createAsyncThunk(
-    "auth/loaduser",
-    async ({ _ }, { rejectWithValue }) => {
-        try {
-            const response = await api.loadUser();
-            return response.data;
-        } catch (err) {
-            return rejectWithValue(err.response.data);
-        }
-    }
-)
-
 //creates 3 promise lifecycles
 const authSlice = createSlice({
     name: "auth",
@@ -82,18 +70,6 @@ const authSlice = createSlice({
             state.user = action.payload;
         },
         [register.rejected]: (state, action) => {
-            state.loading = false;
-            state.error = action.payload.message;
-        },
-        [loadUser.pending]: (state, action) => {
-            state.loading = true;
-        },
-        [loadUser.fulfilled]: (state, action) => {
-            state.loading = false;
-            localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
-            state.user = action.payload;
-        },
-        [loadUser.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.payload.message;
         }
