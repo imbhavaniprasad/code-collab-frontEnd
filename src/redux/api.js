@@ -11,5 +11,3 @@ API.interceptors.request.use((req) => {
 
 export const signIn = (formData) => API.post("/api/v1/signin", formData);
 export const signUp = (formData) => API.post("/api/v1/signup", formData);
-
-export const loadUser = () => API.get("/api/v1/me");

@@ -1,3 +1,10 @@
+div.CodeMirror-cursors {
+  visibility: visible !important; 
+  position: relative;
+  z-index: 3;
+  animation: blink 1.06s steps(1) infinite;
+-webkit-animation: blink 1.06s steps(1) infinite;
+}
 .homePageWrapper {
     display: flex;
     align-items: center;

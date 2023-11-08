@@ -100,14 +100,12 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
                 // });
                 if (code !== null) {
                     editorRef.current?.setValue(code);
-                    // editorRef?.current?.focus();
-                    // x = line && ch && setTimeout(() => {
-                    //     editorRef?.current?.setCursor({
-                    //         line: line,
-                    //         ch: ch,
-                    //     })
-
-                    // }, 0);
+                    editorRef?.current?.focus();
+                    line && ch &&
+                        editorRef?.current?.setCursor({
+                            line: line,
+                            ch: ch + 1,
+                        })
                 }
             });
             function getLowestPosition(anchor, head) {
@@ -140,7 +138,6 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
             });
         }
         return () => {
-            clearTimeout(x);
             socketRef?.current?.off(ACTIONS.CODE_CHANGE);
             socketRef?.current?.off(ACTIONS.SELECT);
         };
